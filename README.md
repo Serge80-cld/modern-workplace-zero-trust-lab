@@ -32,7 +32,7 @@ Ce lab constitue une base solide pour tout environnement Modern Workplace.
 
 ---
 
-## 🛠️ Étapes réalisées
+##  Étapes réalisées
 
 ### 1. Création du groupe Zero Trust – Test
 - Groupe de sécurité dédié aux tests  
