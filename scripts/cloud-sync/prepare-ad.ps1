@@ -1,4 +1,5 @@
-# ============================================
+# Ajout du script de préparation AD pour Cloud Sync
+============================================
 # Script : prepare-ad.ps1
 # Objectif : Préparer l'Active Directory pour Cloud Sync
 # Auteur : SergeLab
