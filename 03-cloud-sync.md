@@ -140,3 +140,27 @@ Quand tu as collé ce contenu dans ton fichier, dis-moi “c’est fait”, et o
 
  Étape 2 : Ajouter le script PowerShell dans /scripts/cloud-sync/prepare-ad.ps1
  Étape 3 : Ajouter le diagramme d’architecture dans ton README
+## 🔷 10. Architecture Cloud Sync (diagramme)
+
+Voici une représentation simple de l’architecture mise en place :
+
+                 +----------------------------+
+                 |      Active Directory      |
+                 |      sergelab.local        |
+                 |                            |
+                 |  - OU=CloudSync            |
+                 |  - Utilisateurs            |
+                 |  - Groupes                 |
+                 +--------------+-------------+
+                                |
+                                | Cloud Sync Agent
+                                | (installé sur le DC)
+                                |
+                 +--------------v-------------+
+                 |        Entra ID            |
+                 |        (Cloud)             |
+                 |                            |
+                 |  - Cloud Sync Config       |
+                 |  - Utilisateurs synchronisés|
+                 |  - Groupes synchronisés    |
+                 +----------------------------+
