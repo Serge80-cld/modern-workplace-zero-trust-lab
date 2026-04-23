@@ -57,4 +57,18 @@ Commandes PowerShell utilisées :
 md C:\HWID
 Install-Script -Name Get-WindowsAutopilotInfo -Force
 & "C:\Program Files\WindowsPowerShell\Scripts\Get-WindowsAutopilotInfo.ps1" -OutputFile C:\HWID\AutopilotHWID.csv
+## 🔷 Lab 3 — Entra Connect Cloud Sync
+
+Ce lab présente la mise en place d’une synchronisation hybride moderne entre Active Directory On‑Prem et Entra ID à l’aide de **Cloud Sync**, la version légère et moderne d’Azure AD Connect.
+
+**Contenu du lab :**
+- Architecture hybride AD ↔ Entra ID
+- Installation et configuration de l’agent Cloud Sync
+- Synchronisation des utilisateurs et groupes
+- Tests de modification et propagation
+- Activation de Password Writeback + SSPR
+- Troubleshooting et bonnes pratiques
+
+📄 **Lien vers le lab :**  
+[laboratoires/03-cloud-sync.md](laboratoires/03-cloud-sync.md)
 
