@@ -1,0 +1,21 @@
+scripts/remediations/Check-Service.ps1
+powershell
+$service = Get-Service -Name "wuauserv" -ErrorAction SilentlyContinue
+
+if ($service -and $service.Status -eq "Running") {
+    Write-Output "Service OK"
+    exit 0
+} else {
+    Write-Output "Service not running"
+    exit 1
+}
+ scripts/remediations/Remediate-Service.ps1
+powershell
+$service = Get-Service -Name "wuauserv" -ErrorAction SilentlyContinue
+
+if ($service) {
+    Start-Service -Name "wuauserv"
+    Write-Output "Service started"
+} else {
+    Write-Output "Service not found"
+}
