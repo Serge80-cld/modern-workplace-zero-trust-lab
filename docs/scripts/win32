@@ -1,0 +1,103 @@
+Packaging Win32 — MSI, EXE, IntuneWin
+ Objectif
+Documenter la méthode professionnelle pour empaqueter et déployer des applications Win32 via Microsoft Intune.
+
+ 1. Structure recommandée
+Code
+scripts/win32/
+    ├── NotepadPP/
+    │     ├── install.ps1
+    │     ├── uninstall.ps1
+    │     └── detection.ps1
+    ├── Chrome/
+    │     ├── install.ps1
+    │     ├── uninstall.ps1
+    │     └── detection.ps1
+2. Préparation du dossier source
+Créer un dossier contenant :
+
+le fichier MSI ou EXE
+
+les scripts PowerShell (install / uninstall / detection)
+
+Exemple :
+
+Code
+C:\Win32\NotepadPP\
+    notepadpp.exe
+    install.ps1
+    uninstall.ps1
+    detection.ps1
+3. Création du package .intunewin
+Télécharger l’outil officiel :
+Microsoft Win32 Content Prep Tool
+
+Commande :
+
+powershell
+IntuneWinAppUtil.exe -c "C:\Win32\NotepadPP" -s "notepadpp.exe" -o "C:\Win32\Output"
+Résultat :
+
+Code
+notepadpp.intunewin
+4. Script d’installation (EXE)
+powershell
+Start-Process -FilePath ".\notepadpp.exe" -ArgumentList "/S" -Wait
+5. Script de désinstallation
+powershell
+Start-Process -FilePath "C:\Program Files\Notepad++\uninstall.exe" -ArgumentList "/S" -Wait
+6. Script de détection
+powershell
+if (Test-Path "C:\Program Files\Notepad++\notepad++.exe") {
+    exit 0
+} else {
+    exit 1
+}
+7. Import dans Intune
+Intune Admin Center → Apps → Windows → Add → Win32 app
+
+Paramètres :
+
+Section	Valeur
+App package file	notepadpp.intunewin
+Install command	powershell.exe -ExecutionPolicy Bypass -File install.ps1
+Uninstall command	powershell.exe -ExecutionPolicy Bypass -File uninstall.ps1
+Detection rule	Script PowerShell
+Requirements	Windows 10/11
+Assignments	Required / Available
+
+
+8. Best practices
+Toujours utiliser des scripts PowerShell (pas les commandes directes)
+
+Toujours ajouter une règle de détection fiable
+
+Toujours tester sur un groupe pilote
+
+Toujours versionner les packages
+
+Utiliser Supersedence pour remplacer une version par une autre
+
+9. Supersedence (remplacement de version)
+Permet de :
+
+remplacer automatiquement une ancienne version
+
+désinstaller l’ancienne
+
+installer la nouvelle
+
+Très utile pour Chrome, Notepad++, 7zip, etc.
+
+10. Conclusion
+Cette brique démontre :
+
+la maîtrise du packaging Win32
+
+la gestion MSI / EXE
+
+la création de packages IntuneWin
+
+la gestion des règles de détection
+
+la structuration professionnelle des scripts
